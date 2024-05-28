@@ -31,9 +31,9 @@ module PdfMerger
 
       if response.is_a?(Net::HTTPSuccess)
         File.open(output_path, 'wb') { |file| file.write(response.body) }
-        puts "PDF merged successfully and saved to #{output_path}"
+        puts "Success!"
       else
-        puts "Failed to merge PDF: #{response.message}"
+        puts "Failed with error: #{response.message}"
       end
     end
 
