@@ -12,16 +12,17 @@ module PdfMerger
     API_ENDPOINT = ENV.fetch('PDF_MERGER_API_ENDPOINT', nil)
     API_TOKEN = ENV.fetch('PDF_MERGER_TOKEN', nil)
 
-    def initialize(file_urls, output_path)
+    def initialize(file_urls, output_path, skip_token: false)
       @file_urls = file_urls
       @output_path = output_path
+      @skip_token = skip_token
     end
 
     def merge
       uri = URI(API_ENDPOINT)
       request = Net::HTTP::Post.new(uri)
-      request['token'] = API_TOKEN
-      form_data = @file_urls.map { |url| ["files", url] }
+      request['token'] = API_TOKEN unless skip_token
+      form_data = file_urls.map { |url| ["files", url] }
       
       request.set_form form_data, 'multipart/form-data'
       
@@ -30,11 +31,15 @@ module PdfMerger
       end
 
       if response.is_a?(Net::HTTPSuccess)
-        File.open(@output_path, 'wb') { |file| file.write(response.body) }
-        puts "PDF merged successfully and saved to #{@output_path}"
+        File.open(output_path, 'wb') { |file| file.write(response.body) }
+        puts "PDF merged successfully and saved to #{output_path}"
       else
         puts "Failed to merge PDF: #{response.message}"
       end
     end
+
+    private
+
+    attr_reader :file_urls, :output_path, :skip_token
   end
 end

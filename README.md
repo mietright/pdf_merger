@@ -34,6 +34,6 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-merger = PdfMerger::Merger.new(file_urls, output_path)
+merger = PdfMerger::Merger.new(file_urls, output_path, skip_token: true)
 merger.merge
 ```
