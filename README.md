@@ -16,13 +16,6 @@ And then execute:
 bundle install
 ```
 
-## Configure the environment variables
-```
-# .env
-PDF_MERGER_API_ENDPOINT=https://your.custom.endpoint/api/v1/pdf/merge
-PDF_MERGER_TOKEN=the-token
-```
-
 ## Usage
 
 ```ruby
@@ -34,6 +27,22 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-merger = PdfMerger::Merger.new(file_urls, output_path, skip_token: true)
+merger = PdfMerger::Merger.new(file_urls, output_path, skip_token: true, api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/merge')
+merger.merge
+```
+
+or with a token
+
+```ruby
+
+require 'pdf_merger'
+
+file_urls = [
+  'https://s3-public.de/file1.pdf',
+  'https://s3-public.de/file2.pdf'
+]
+output_path = './output.pdf'
+
+merger = PdfMerger::Merger.new(file_urls, output_path, skip_token: false, api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/merge', api_token: 'the-token')
 merger.merge
 ```

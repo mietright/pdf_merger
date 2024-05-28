@@ -9,19 +9,18 @@ module PdfMerger
   class Error < StandardError; end
 
   class Merger
-    API_ENDPOINT = ENV.fetch('PDF_MERGER_API_ENDPOINT', nil)
-    API_TOKEN = ENV.fetch('PDF_MERGER_TOKEN', nil)
-
-    def initialize(file_urls, output_path, skip_token: false)
+    def initialize(file_urls, output_path, skip_token: false, api_endpoint:, api_token: nil)
       @file_urls = file_urls
       @output_path = output_path
       @skip_token = skip_token
+      @api_endpoint = api_endpoint
+      @api_token = api_token
     end
 
     def merge
-      uri = URI(API_ENDPOINT)
+      uri = URI(api_endpoint)
       request = Net::HTTP::Post.new(uri)
-      request['token'] = API_TOKEN unless skip_token
+      request['token'] = api_token unless skip_token
       form_data = file_urls.map { |url| ["files", url] }
       
       request.set_form form_data, 'multipart/form-data'
@@ -40,6 +39,7 @@ module PdfMerger
 
     private
 
-    attr_reader :file_urls, :output_path, :skip_token
+    attr_reader :file_urls, :output_path,
+                :skip_token, :api_endpoint, :api_token
   end
 end
