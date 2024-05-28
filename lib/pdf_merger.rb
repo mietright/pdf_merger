@@ -32,8 +32,10 @@ module PdfMerger
       if response.is_a?(Net::HTTPSuccess)
         File.open(output_path, 'wb') { |file| file.write(response.body) }
         puts "Success!"
+        OpenStruct.new(success: true, errors: '')
       else
-        puts "Failed with error: #{response.message}"
+        puts "Failed!"
+        OpenStruct.new(success: false, errors: response.message)
       end
     end
 
