@@ -1,7 +1,7 @@
 # pdf_merger.gemspec
 Gem::Specification.new do |spec|
   spec.name          = "pdf_merger"
-  spec.version       = "0.1.0"
+  spec.version       = "1.0.0"
   spec.authors       = ["Isabel Garcia", "Antoine Legrand"]
   spec.email         = ["isabel.garcia@conny.legal", "antoine.legrand@conny.legal"]
 
@@ -11,8 +11,6 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*", "README.md", "LICENSE.txt"]
-  spec.bindir        = "exe"
-  spec.executables   = spec.name
   spec.require_paths = ["lib"]
 
   spec.add_dependency "net-http", "~> 0.2.0"
