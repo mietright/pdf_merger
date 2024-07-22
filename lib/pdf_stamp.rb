@@ -23,7 +23,7 @@ module PdfMerger
       request['token'] = api_token unless api_token.nil?
       form_data = [
         ['files', file_url],
-        ['stamp_text', {"text" => stamp_text, "color" => "0,0,0", "position_name" => "tr"}.to_json]
+        ['stamp_text', {"text" => stamp_text, "color" => "0,0,0", "position_name" => "tr", "over" => "true"}.to_json]
       ]
 
       request.set_form form_data, 'multipart/form-data'
