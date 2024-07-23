@@ -1,7 +1,7 @@
 # pdf_merger.gemspec
 Gem::Specification.new do |spec|
   spec.name          = "pdf_merger"
-  spec.version       = "1.0.0"
+  spec.version       = "2.0.0"
   spec.authors       = ["Isabel Garcia", "Antoine Legrand"]
   spec.email         = ["isabel.garcia@conny.legal", "antoine.legrand@conny.legal"]
 
