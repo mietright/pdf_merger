@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pdf_merger (0.1.0)
+    pdf_merger (1.0.0)
       net-http (~> 0.2.0)
 
 GEM
