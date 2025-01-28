@@ -5,7 +5,7 @@ require "net/http"
 require "uri"
 require "json"
 
-module PdfMerger
+module Pdfserve
   class Error < StandardError; end
 
   class Merge
