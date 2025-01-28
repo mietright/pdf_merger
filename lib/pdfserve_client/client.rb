@@ -2,7 +2,7 @@ require_relative "merge"
 require_relative "stamp"
 require_relative "split"
 
-module PdfMerger
+module PdfserveClient
   class Client
     attr_reader :merge_service, :stamp_service, :split_service
 
@@ -26,15 +26,15 @@ module PdfMerger
     private
 
     def merge_service
-      PdfMerger::Merge.new(api_endpoint: @api_endpoint, api_token: @api_token)
+      PdfserveClient::Merge.new(api_endpoint: @api_endpoint, api_token: @api_token)
     end
 
     def stamp_service
-      PdfMerger::Stamp.new(api_endpoint: @api_endpoint, api_token: @api_token)
+      PdfserveClient::Stamp.new(api_endpoint: @api_endpoint, api_token: @api_token)
     end
 
     def split_service
-      PdfMerger::Split.new(api_endpoint: @api_endpoint, api_token: @api_token)
+      PdfserveClient::Split.new(api_endpoint: @api_endpoint, api_token: @api_token)
     end
   end
 end

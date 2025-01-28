@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "pdf_merger"
+require "pdfserve_client"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

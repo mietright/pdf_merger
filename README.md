@@ -1,13 +1,13 @@
-# PdfMerger
+# PdfserveClient
 
-PdfMerger is a gem to merge PDF files using the merger conny.dev service.
+PdfserveClient is a gem to merge, stamp or split PDF files using the service https://github.com/ant31/pdfserve.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'pdf_merger', git: 'https://github.com/mietright/pdf_merger'
+gem 'pdfserve_client', '~> 2.0'
 ```
 
 And then execute:
@@ -18,10 +18,10 @@ bundle install
 
 ## Usage
 
-### PDF Merge
+### PDFServe Client
 
 ```ruby
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_urls = [
   'https://s3-public.de/file1.pdf',
@@ -29,7 +29,7 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.merge(file_urls:, output_path:)
 ```
 
@@ -37,7 +37,7 @@ or with a token
 
 ```ruby
 
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_urls = [
   'https://s3-public.de/file1.pdf',
@@ -45,7 +45,7 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.merge(file_urls:, output_path:)
 ```
 
@@ -56,12 +56,12 @@ client.merge(file_urls:, output_path:)
 ### PDF Stamp
 
 ```ruby
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.stamp(file_url:, stamp_text:)
 ```
 
@@ -69,12 +69,12 @@ or with a token
 
 ```ruby
 
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.stamp(file_url:, stamp_text:)
 ```
 
@@ -84,12 +84,12 @@ client.stamp(file_url:, stamp_text:)
 ### PDF Split
 
 ```ruby
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.split(file_url:, pages:)
 ```
 
@@ -97,12 +97,12 @@ or with a token
 
 ```ruby
 
-require 'pdf_merger'
+require 'pdfserve_client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
 
-client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = PdfserveClient::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.split(file_url:, pages:)
 ```
 
