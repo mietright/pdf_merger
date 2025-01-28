@@ -29,7 +29,7 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.merge(file_urls:, output_path:)
 ```
 
@@ -45,7 +45,7 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.merge(file_urls:, output_path:)
 ```
 
@@ -61,7 +61,7 @@ require 'pdfserve_client'
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.stamp(file_url:, stamp_text:)
 ```
 
@@ -74,7 +74,7 @@ require 'pdfserve_client'
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.stamp(file_url:, stamp_text:)
 ```
 
@@ -89,7 +89,7 @@ require 'pdfserve_client'
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint')
 client.split(file_url:, pages:)
 ```
 
@@ -102,7 +102,7 @@ require 'pdfserve_client'
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
 
-client = PdfserveClient.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client = Pdfserve::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
 client.split(file_url:, pages:)
 ```
 

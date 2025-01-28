@@ -5,39 +5,37 @@ require "net/http"
 require "uri"
 require "json"
 
-module PdfserveClient
+module Pdfserve
   class Error < StandardError; end
 
-  class Split
-    PATH = "/api/v1/pdf/split"
+  class Stamp
+    PATH = "/api/v1/pdf/stamp"
 
     def initialize(api_endpoint:, api_token: nil)
       @api_endpoint = api_endpoint + PATH
       @api_token = api_token
     end
 
-    def split(file_url:, pages:)
+    def call(file_url, stamp_text)
       uri = URI(api_endpoint)
-      uri.query = URI.encode_www_form({ pages: pages })
-
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == "https"
       request = Net::HTTP::Post.new(uri.request_uri)
 
       request["token"] = api_token unless api_token.nil?
-      form_data = [["splitfile", file_url]]
+      form_data = [
+        ["files", file_url],
+        ["stamp_text", { "text" => stamp_text, "color" => "0,0,0", "position_name" => "tr", "over" => "true" }.to_json]
+      ]
 
       request.set_form form_data, "multipart/form-data"
 
       response = http.request(request)
 
       if response.is_a?(Net::HTTPSuccess)
-        puts "Successful split!"
-        content_disposition = response.header["Content-Disposition"]
-        filename = content_disposition[/filename="?([^"]+)"?/, 1] || "archive.tar.gz"
-
+        puts "Successful stamp!"
         OpenStruct.new(
-          success: true, response: response.read_body, filename: filename, errors: ""
+          success: true, response: response.body, errors: ""
         )
       else
         puts "Failed!"
