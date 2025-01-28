@@ -16,7 +16,7 @@ module PdfMerger
       @api_token = api_token
     end
 
-    def split(splitfile:, pages:)
+    def split(file_url:, pages:)
       uri = URI(api_endpoint)
       uri.query = URI.encode_www_form({ pages: pages })
 
@@ -25,7 +25,7 @@ module PdfMerger
       request = Net::HTTP::Post.new(uri.request_uri)
 
       request["token"] = api_token unless api_token.nil?
-      form_data = [["splitfile", splitfile]]
+      form_data = [["splitfile", file_url]]
 
       request.set_form form_data, "multipart/form-data"
 

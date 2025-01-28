@@ -29,8 +29,8 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-merger = PdfMerger::Merger.new(api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/merge')
-merger.merge(file_urls, output_path)
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client.merge(file_urls:, output_path:)
 ```
 
 or with a token
@@ -45,8 +45,8 @@ file_urls = [
 ]
 output_path = './output.pdf'
 
-merger = PdfMerger::Merger.new(api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/merge', api_token: 'the-token')
-merger.merge(file_urls, output_path)
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client.merge(file_urls:, output_path:)
 ```
 
 `file_urls` needs to be an array of urls (images or pdfs) that need to be merged and in the order how you want to merge it
@@ -56,27 +56,55 @@ merger.merge(file_urls, output_path)
 ### PDF Stamp
 
 ```ruby
-require 'pdf_stamp'
+require 'pdf_merger'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-merger = PdfMerger::Stamp.new(api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/stamp')
-merger.call(file_url, stamp_text)
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client.stamp(file_url:, stamp_text:)
 ```
 
 or with a token
 
 ```ruby
 
-require 'pdf_stamp'
+require 'pdf_merger'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
 
-merger = PdfMerger::Stamp.new(api_endpoint: 'https://your.custom.endpoint/api/v1/pdf/stamp', api_token: 'the-token')
-merger.call(file_url, stamp_text)
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client.stamp(file_url:, stamp_text:)
 ```
 
 `file_url` needs to be the url (image or pdf) that need to be stamped
 `stamp_text` it needs to be the text you want to add at the top right of the file
+
+### PDF Split
+
+```ruby
+require 'pdf_merger'
+
+file_url = 'https://s3-public.de/file1.pdf'
+pages = '1-3,4,6-8'
+
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint')
+client.split(file_url:, pages:)
+```
+
+or with a token
+
+```ruby
+
+require 'pdf_merger'
+
+file_url = 'https://s3-public.de/file1.pdf'
+pages = '1-3,4,6-8'
+
+client = PdfMerger::Client.new(api_endpoint: 'https://your.custom.endpoint', api_token: 'the-token')
+client.split(file_url:, pages:)
+```
+
+`file_url` needs to be the url ( pdf) that need to be splitted
+`pages` it needs to be comma separated page(s) range for splitting file into those pages.

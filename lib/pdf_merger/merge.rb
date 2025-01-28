@@ -8,7 +8,7 @@ require "json"
 module PdfMerger
   class Error < StandardError; end
 
-  class Merger
+  class Merge
     PATH = "/api/v1/pdf/merge"
 
     def initialize(api_endpoint:, api_token: nil)

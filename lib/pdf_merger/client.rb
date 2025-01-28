@@ -19,14 +19,14 @@ module PdfMerger
       stamp_service.call(file_url, stamp_text)
     end
 
-    def split(splitfile:, pages:)
-      split_service.split(splitfile:, pages:)
+    def split(file_url:, pages:)
+      split_service.split(file_url:, pages:)
     end
 
     private
 
     def merge_service
-      PdfMerger::Merger.new(api_endpoint: @api_endpoint, api_token: @api_token)
+      PdfMerger::Merge.new(api_endpoint: @api_endpoint, api_token: @api_token)
     end
 
     def stamp_service
