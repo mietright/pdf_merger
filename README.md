@@ -21,7 +21,7 @@ bundle install
 ### PDFServe Client
 
 ```ruby
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_urls = [
   'https://s3-public.de/file1.pdf',
@@ -37,7 +37,7 @@ or with a token
 
 ```ruby
 
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_urls = [
   'https://s3-public.de/file1.pdf',
@@ -56,7 +56,7 @@ client.merge(file_urls:, output_path:)
 ### PDF Stamp
 
 ```ruby
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
@@ -69,7 +69,7 @@ or with a token
 
 ```ruby
 
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 stamp_text = 'A1'
@@ -84,7 +84,7 @@ client.stamp(file_url:, stamp_text:)
 ### PDF Split
 
 ```ruby
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
@@ -97,7 +97,7 @@ or with a token
 
 ```ruby
 
-require 'pdfserve_client'
+require 'pdfserve/client'
 
 file_url = 'https://s3-public.de/file1.pdf'
 pages = '1-3,4,6-8'
