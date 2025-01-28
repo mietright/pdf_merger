@@ -1,4 +1,4 @@
-require_relative "merger"
+require_relative "merge"
 require_relative "stamp"
 require_relative "split"
 
