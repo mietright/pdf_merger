@@ -1,9 +1,9 @@
 # pdf_merger.gemspec
 Gem::Specification.new do |spec|
   spec.name          = "pdf_merger"
-  spec.version       = "1.0.0"
-  spec.authors       = ["Isabel Garcia", "Antoine Legrand"]
-  spec.email         = ["isabel.garcia@conny.legal", "antoine.legrand@conny.legal"]
+  spec.version       = "2.0.0"
+  spec.authors       = ["Isabel Garcia", "Antoine Legrand", "Lakhan Pasari"]
+  spec.email         = ["isabel.garcia@conny.legal", "antoine.legrand@conny.legal", "lakhan.pasari@conny.legal"]
 
   spec.summary       = "A gem for merging PDFs using an external API"
   spec.description   = "This gem provides a simple interface to merge PDFs using the conny.dev API."
