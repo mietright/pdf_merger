@@ -9,6 +9,7 @@ gem 'rake', '~> 13.0'
 
 group :development, :test do
   gem 'rspec', '~> 3.0'
+  gem 'rspec_junit_formatter', require: false
   gem 'rubocop', '~> 1.21'
   gem 'simplecov', require: false
   gem 'webmock', require: false
