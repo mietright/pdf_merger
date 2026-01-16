@@ -4,6 +4,7 @@ require_relative "version"
 require "net/http"
 require "uri"
 require "json"
+require "ostruct"
 
 module Pdfserve
   class Error < StandardError; end

@@ -1,6 +1,14 @@
-# frozen_string_literal: true
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter "/spec/"
+end
 
-require "pdfserve_client"
+
+require_relative '../lib/pdfserve/client'
+require_relative '../lib/pdfserve/merge'
+require_relative '../lib/pdfserve/split'
+require_relative '../lib/pdfserve/stamp'
+require_relative '../lib/pdfserve/version'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

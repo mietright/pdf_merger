@@ -1,0 +1,86 @@
+image: ruby:3.4
+
+stages:
+  - lint
+  - security
+  - test
+
+include:
+  - project: 'connylegal/mietright_deployments'
+    ref: main
+    file: '/.gitlab-ci/trivy.yaml'
+
+cache:
+  key: "${CI_COMMIT_REF_SLUG}"
+  paths:
+    - vendor/bundle
+
+
+rspec test:
+  stage: test
+  image: ruby:3.4
+  script:
+    - gem install bundler && bundle install --jobs=4 --retry=2
+    - bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
+  artifacts:
+    when: always
+    paths:
+      - rspec.xml
+      - coverage
+    reports:
+      junit: rspec.xml
+  except:
+    - main
+
+coverage check:
+  stage: test
+  image: ruby:3.4
+  script:
+    - |
+      COVERAGE=$(ruby -e "puts JSON.parse(File.read('coverage/.resultset.json')).values.map{|v| v['coverage'].values}.flatten.compact.sum.fdiv(\
+        JSON.parse(File.read('coverage/.resultset.json')).values.map{|v| v['coverage'].values}.flatten.compact.size) * 100 rescue 0")
+      echo "Coverage: $COVERAGE%"
+      if (( $(echo "$COVERAGE < 90" | bc -l) )); then
+        echo "Coverage below 90%!" && exit 1
+      fi
+  dependencies:
+    - rspec test
+  needs:
+    - rspec test
+  except:
+    - main
+  allow_failure: false
+
+rubocop lint:
+  stage: lint
+  script:
+    - gem install bundler && bundle install --jobs=4 --retry=2
+    - bundle exec rubocop --force-exclusion
+  except:
+    - main
+
+semgrep:
+  stage: security
+  image: semgrep/semgrep
+  script: semgrep ci --no-suppress-errors
+  variables:
+    SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
+  allow_failure: false
+
+trivy-vuln:
+  extends: .trivy-vuln
+  variables:
+    TRIVY_SEVERITY: "HIGH,CRITICAL"
+  allow_failure: false
+
+trivy-misconfig:
+  extends: .trivy-misconfig
+  variables:
+    TRIVY_SEVERITY: "HIGH,CRITICAL"
+  allow_failure: false
+
+trivy-license:
+  extends: .trivy-license
+  variables:
+    TRIVY_SEVERITY: "HIGH,CRITICAL"
+  allow_failure: false
