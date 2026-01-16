@@ -6,7 +6,7 @@ require 'fileutils'
 RSpec.describe Pdfserve::Merge do
   let(:api_endpoint) { 'https://api.example.com' }
   let(:api_token) { 'test-token' }
-  let(:merge) { described_class.new(api_endpoint: api_endpoint, api_token: api_token) }
+  let(:merge) { described_class.new(api_endpoint:, api_token:) }
 
   describe '#merge' do
     it 'returns success on successful merge' do

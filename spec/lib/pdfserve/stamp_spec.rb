@@ -5,7 +5,7 @@ require 'webmock/rspec'
 RSpec.describe Pdfserve::Stamp do
   let(:api_endpoint) { 'https://api.example.com' }
   let(:api_token) { 'test-token' }
-  let(:stamp) { described_class.new(api_endpoint: api_endpoint, api_token: api_token) }
+  let(:stamp) { described_class.new(api_endpoint:, api_token:) }
 
   describe '#call' do
     it 'returns success on successful stamp' do

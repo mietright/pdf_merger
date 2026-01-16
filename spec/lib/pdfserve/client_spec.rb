@@ -5,7 +5,7 @@ require 'webmock/rspec'
 RSpec.describe Pdfserve::Client do
   let(:api_endpoint) { 'https://api.example.com' }
   let(:api_token) { 'test-token' }
-  let(:client) { described_class.new(api_endpoint: api_endpoint, api_token: api_token) }
+  let(:client) { described_class.new(api_endpoint:, api_token:) }
 
   it 'initializes with api_endpoint and api_token' do
     expect(client).to be_a(Pdfserve::Client)

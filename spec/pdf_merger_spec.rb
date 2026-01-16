@@ -1,7 +1,7 @@
 RSpec.describe Pdfserve::Client do
   let(:api_endpoint) { 'https://api.example.com' }
   let(:api_token) { 'test-token' }
-  let(:client) { described_class.new(api_endpoint: api_endpoint, api_token: api_token) }
+  let(:client) { described_class.new(api_endpoint:, api_token:) }
 
   it 'delegates #merge to Pdfserve::Merge' do
     merge_service = instance_double(Pdfserve::Merge)

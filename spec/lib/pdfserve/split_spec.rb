@@ -5,7 +5,7 @@ require 'webmock/rspec'
 RSpec.describe Pdfserve::Split do
   let(:api_endpoint) { 'https://api.example.com' }
   let(:api_token) { 'test-token' }
-  let(:split) { described_class.new(api_endpoint: api_endpoint, api_token: api_token) }
+  let(:split) { described_class.new(api_endpoint:, api_token:) }
 
   describe '#split' do
     it 'returns success on successful split' do
@@ -16,7 +16,7 @@ RSpec.describe Pdfserve::Split do
       )
       file_url = 'https://file1.pdf'
       pages = '1-3,4,6-8'
-      result = split.split(file_url: file_url, pages: pages)
+      result = split.split(file_url:, pages:)
       expect(result.success).to be true
       expect(result.filename).to eq('archive.tar.gz')
     end
@@ -29,7 +29,7 @@ RSpec.describe Pdfserve::Split do
       )
       file_url = 'https://file1.pdf'
       pages = '1-3,4,6-8'
-      result = split.split(file_url: file_url, pages: pages)
+      result = split.split(file_url:, pages:)
       expect(result.success).to be false
       expect(result.errors).to eq('Bad Request').or eq('')
     end

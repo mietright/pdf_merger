@@ -19,7 +19,7 @@ module Pdfserve
 
     def split(file_url:, pages:)
       uri = URI(api_endpoint)
-      uri.query = URI.encode_www_form({ pages: pages })
+      uri.query = URI.encode_www_form({ pages: })
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == 'https'
@@ -38,7 +38,7 @@ module Pdfserve
         filename = content_disposition[/filename="?([^"]+)"?/, 1] || 'archive.tar.gz'
 
         OpenStruct.new(
-          success: true, response: response.read_body, filename: filename, errors: ''
+          success: true, response: response.read_body, filename:, errors: ''
         )
       else
         puts 'Failed!'
