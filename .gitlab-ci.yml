@@ -2,8 +2,8 @@ image: ruby:3.4
 
 stages:
   - lint
-  - security
   - test
+  - security
 
 include:
   - project: 'connylegal/mietright_deployments'
@@ -14,7 +14,6 @@ cache:
   key: "${CI_COMMIT_REF_SLUG}"
   paths:
     - vendor/bundle
-
 
 rspec test:
   stage: test
@@ -29,12 +28,12 @@ rspec test:
       - coverage
     reports:
       junit: rspec.xml
-  except:
-    - main
 
 coverage check:
   stage: test
   image: ruby:3.4
+  needs:
+    - rspec test
   script:
     - |
       COVERAGE=$(ruby -e "puts JSON.parse(File.read('coverage/.resultset.json')).values.map{|v| v['coverage'].values}.flatten.compact.sum.fdiv(\
@@ -47,8 +46,6 @@ coverage check:
     - rspec test
   needs:
     - rspec test
-  except:
-    - main
   allow_failure: false
 
 rubocop lint:
@@ -56,8 +53,6 @@ rubocop lint:
   script:
     - gem install bundler && bundle install --jobs=4 --retry=2
     - bundle exec rubocop --force-exclusion
-  except:
-    - main
 
 semgrep:
   stage: security
