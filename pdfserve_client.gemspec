@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/**/*', 'README.md', 'LICENSE.txt']
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 3.4'
+  spec.required_ruby_version = '>= 3.3'
   spec.add_dependency 'net-http', '~> 0.2.0'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end
