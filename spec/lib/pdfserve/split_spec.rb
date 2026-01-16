@@ -31,7 +31,7 @@ RSpec.describe Pdfserve::Split do
       pages = '1-3,4,6-8'
       result = split.split(file_url: file_url, pages: pages)
       expect(result.success).to be false
-      expect(result.errors).to eq('Bad Request').or eq("")
+      expect(result.errors).to eq('Bad Request').or eq('')
     end
   end
 end

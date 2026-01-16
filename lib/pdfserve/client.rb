@@ -1,11 +1,9 @@
-require_relative "merge"
-require_relative "stamp"
-require_relative "split"
+require_relative 'merge'
+require_relative 'stamp'
+require_relative 'split'
 
 module Pdfserve
   class Client
-    attr_reader :merge_service, :stamp_service, :split_service
-
     def initialize(api_endpoint:, api_token:)
       @api_endpoint = api_endpoint
       @api_token = api_token

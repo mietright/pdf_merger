@@ -35,7 +35,7 @@ RSpec.describe Pdfserve::Merge do
       FileUtils.mkdir_p(File.dirname(output_path))
       result = merge.merge(file_urls, output_path)
       expect(result.success).to be false
-      expect(result.errors).to eq('Bad Request').or eq("")
+      expect(result.errors).to eq('Bad Request').or eq('')
       expect(File.exist?(output_path)).to be false
     end
   end

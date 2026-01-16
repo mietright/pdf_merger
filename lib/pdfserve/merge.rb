@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "version"
-require "net/http"
-require "uri"
-require "json"
-require "ostruct"
+require_relative 'version'
+require 'net/http'
+require 'uri'
+require 'json'
+require 'ostruct'
 
 module Pdfserve
   class Error < StandardError; end
 
   class Merge
-    PATH = "/api/v1/pdf/merge"
+    PATH = '/api/v1/pdf/merge'
 
     def initialize(api_endpoint:, api_token: nil)
       @api_endpoint = api_endpoint + PATH
@@ -20,21 +20,21 @@ module Pdfserve
     def merge(file_urls, output_path)
       uri = URI(api_endpoint)
       request = Net::HTTP::Post.new(uri)
-      request["token"] = api_token unless api_token.nil?
-      form_data = file_urls.map { |url| ["files", url] }
+      request['token'] = api_token unless api_token.nil?
+      form_data = file_urls.map { |url| ['files', url] }
 
-      request.set_form form_data, "multipart/form-data"
+      request.set_form form_data, 'multipart/form-data'
 
-      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.request(request)
       end
 
       if response.is_a?(Net::HTTPSuccess)
-        File.open(output_path, "wb") { |file| file.write(response.body) }
-        puts "Success!"
-        OpenStruct.new(success: true, errors: "")
+        File.binwrite(output_path, response.body)
+        puts 'Success!'
+        OpenStruct.new(success: true, errors: '')
       else
-        puts "Failed!"
+        puts 'Failed!'
         OpenStruct.new(success: false, errors: response.message)
       end
     end

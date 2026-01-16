@@ -30,7 +30,7 @@ RSpec.describe Pdfserve::Stamp do
       stamp_text = 'A1'
       result = stamp.call(file_url, stamp_text)
       expect(result.success).to be false
-      expect(result.errors).to eq('Bad Request').or eq("")
+      expect(result.errors).to eq('Bad Request').or eq('')
     end
   end
 end
