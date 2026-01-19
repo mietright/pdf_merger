@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Specify your gem's dependencies in pdf_merger.gemspec
 gemspec
 
-gem "rake", "~> 13.0"
+gem 'rake', '~> 13.0'
 
-gem "rspec", "~> 3.0"
-
-gem "rubocop", "~> 1.21"
+group :development, :test do
+  gem 'rspec', '~> 3.0'
+  gem 'rspec_junit_formatter', require: false
+  gem 'rubocop', '~> 1.21'
+  gem 'simplecov', require: false
+  gem 'webmock', require: false
+end
