@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [2.1.0] - 2026-07-21
+
+### Added
+
+- `merge` now accepts an optional `rotations:` array (clockwise degrees, aligned by index with `file_urls`).
+  When provided, it is forwarded to the pdfserve `/merge` endpoint as repeated `rotations` query params.
+  Omitting it preserves the previous behaviour exactly.
+
 ## [1.0.0] - 2024-05-29
 
 ### Added

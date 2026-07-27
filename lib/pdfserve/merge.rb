@@ -17,8 +17,9 @@ module Pdfserve
       @api_token = api_token
     end
 
-    def merge(file_urls, output_path)
+    def merge(file_urls, output_path, rotations: nil)
       uri = URI(api_endpoint)
+      uri.query = URI.encode_www_form(rotations.map { |angle| ['rotations', angle] }) if rotations && !rotations.empty?
       request = Net::HTTP::Post.new(uri)
       request['token'] = api_token unless api_token.nil?
       form_data = file_urls.map { |url| ['files', url] }

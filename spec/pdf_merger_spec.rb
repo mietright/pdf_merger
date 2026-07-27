@@ -6,7 +6,7 @@ RSpec.describe Pdfserve::Client do
   it 'delegates #merge to Pdfserve::Merge' do
     merge_service = instance_double(Pdfserve::Merge)
     allow(Pdfserve::Merge).to receive(:new).and_return(merge_service)
-    expect(merge_service).to receive(:merge).with(%w[a b], 'out.pdf')
+    expect(merge_service).to receive(:merge).with(%w[a b], 'out.pdf', rotations: nil)
     client.merge(file_urls: %w[a b], output_path: 'out.pdf')
   end
 
