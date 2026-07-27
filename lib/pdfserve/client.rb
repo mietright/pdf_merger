@@ -9,8 +9,8 @@ module Pdfserve
       @api_token = api_token
     end
 
-    def merge(file_urls:, output_path:)
-      merge_service.merge(file_urls, output_path)
+    def merge(file_urls:, output_path:, rotations: nil)
+      merge_service.merge(file_urls, output_path, rotations:)
     end
 
     def stamp(file_url:, stamp_text:)

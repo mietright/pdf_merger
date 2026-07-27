@@ -1,7 +1,7 @@
 # pdf_merger.gemspec
 Gem::Specification.new do |spec|
   spec.name          = 'pdfserve_client'
-  spec.version       = '2.0.1'
+  spec.version       = '2.1.0'
   spec.authors       = ['Isabel Garcia', 'Antoine Legrand', 'Lakhan Pasari']
   spec.email         = ['isabelgg22@gmail.com', 'antoine.legrand@conny.legal', 'lakhan.pasari@conny.legal']
 
